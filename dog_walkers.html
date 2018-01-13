@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="stylesheets/project_style.css">
+</head>
+
+<body>
+<table class="toolbar">
+	<td class="toolbar" id="user">
+        {{dog_owner.name}}
+        <a class="switch" href="/logout">    switch user</a>
+    </td>
+	<td class="toolbar"><a href="/dogwalker" class="toolbar">Dog Walkers</a></td>
+	<td class="toolbar"><a href="/account" class="toolbar">Account</a></td>
+</table>
+<div  class="page">
+    <form action="/walkerinfo" method="post">
+    {% for dog_walker in list_of_dogwalkers%}
+    <table align="center" class="default">
+        <tr>
+            <td><h1>Name: {{dog_walker.dogwalker_full_name}}<br><br>Price: {{dog_walker.dogwalker_price}} ILS<br></h1></td>
+            <td><h1>Phone Number: {{dog_walker.dogwalker_phone}}<br><br>Email: {{dog_walker.dogwalker_email}}</h1></td>
+        </tr>
+        <tr class="days">
+            <td class="buttons">
+                {% for day in dog_walker.days_for_owner %}
+                    {% if day[1] == 'enabled' %}
+                    <label class="enabled">
+                       <input type="checkbox" name="trip" value="{{[dog_walker.dogwalker_email,day[0]]}}"><span>{{day[0]}}</span>
+                    </label>
+                    {% endif %}
+                    {% if day[1] == 'disabled' %}
+                    <label class="disabled">
+                       <input type="checkbox" name="trip" value="{{[dog_walker.dogwalker_email,day[0]]}}"><span>{{day[0]}}</span>
+                    </label>
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    {% endfor %}
+    <input type="submit" value="Submit" class="submit_button" id="submit">
+    </form>
+</div>
+</body>
+</html>

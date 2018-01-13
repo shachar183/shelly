@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="stylesheets/project_style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+<table class="toolbar">
+	<td class="toolbar" id="user">
+        User
+        <a class="switch" href="/logout">    switch user</a>       
+    </td>
+	<td class="toolbar"><a href="/dogwalker" class="toolbar">Dog Walkers</a></td>
+	<td class="toolbar"><a href="/account" class="toolbar">Account</a></td>
+</table>
+<div  class="page">
+{% for dog_walker in list_of_dogwalkers%}
+<table align="center" class="select_days">
+	<tr>
+        <td><h1>Name: {{dog_walker.dogwalker_full_name}}<br><br>Price: {{dog_walker.dogwalker_price}}<br></h1></td>
+        <td><h1>Phone Number: {{dog_walker.dogwalker_phone}}<br><br>Email: {{dog_walker.dogwalker_email}}</h1></td>
+    </tr>
+    <form action="" method="">
+    <tr class="days">
+        <td class="buttons">
+            {% for day in dog_walker.days_for_owner %}
+                {% if day[1] == 'enabled' %}
+                <label class="enabled" id="chosen">
+                   <input type="checkbox" name="{{dog_walker.dogwalker_email}}" value="{{day[0]}}"><span>{{day[0]}}</span>
+                </label>
+                {% endif %}
+                {% if day[1] == 'disabled' %}
+                <label class="disabled">
+                   <input type="checkbox" name="{{dog_walker.dogwalker_email}}" value="{{day[0]}}" disabled><span>{{day[0]}}</span>
+                </label>
+                {% endif %}
+            {% endfor %}
+                <input type="submit" value="Submit" class="submit_button">
+        </td>
+    </tr></form>
+</table>
+{% endfor %}
+</div>
+<script>
+
+$('.submit_button').click(function() {
+    /* declare an checkbox array */
+	var chkArray = [];
+    alert("1");
+    $("#chosen").each(function() {
+        alert("here");
+        chkArray.push($(this).val());
+        $(this).removeClass('enabled').addClass('disabled');
+    });
+    $.post(
+    '/dogwalker',{data:chkArray}
+)
+    alert("Data submitted successfully!");
+});
+</script>
+</body>
+</html>

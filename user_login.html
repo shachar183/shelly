@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<link rel="stylesheet" type="text/css" href="stylesheets/project_style.css">
+<body id="blue_background">
+<img src="images/dog_walker.jpg" alt="Dog Walker">
+<div class="left">
+    <h1 class="login">Welcome To Our Website</h1>
+    <h2 class="login">Please Register Your Details:</h2>
+    <form method="post" action="/welcome">Full Name:<br>
+        <input required type="text" name="owner_first_name" placeholder="First Name" id="name" class="login">
+        <input required type="text" name="owner_last_name" placeholder="Last Name" id="name" class="login">
+        <br><br>Email:<br>
+        <input disabled type="text" name="owner_email" value="{{owner_email}}" class="login">
+        <br><br>Phone Number:<br>
+        <input required type="text" name="owner_phone" class="login">
+        <br><br>City:<br>
+        <select required name="owner_city" class="login" id="dropdown">
+            {% for city in info_register.cities %}
+            <option value="{{city}}">{{city}}</option>
+            {% endfor %}
+        </select>
+
+        <h2 class="login">Dog's Information:</h2>
+        Dog's Name:<br>
+        <input required type="text" name="dog_name" class="login">
+        <br><br>Dog's Breed:<br>
+        <select required name="dog_type" class="login" id="dropdown">
+            {% for dog_type in info_register.dog_types %}
+            <option value="{{dog_type}}">{{dog_type}}</option>
+            {% endfor %}
+        </select>
+        <br><br>Dog's Gender:<br>
+        <select required name="dog_gender" class="login" id="dropdown">
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+        </select>
+        <br><br><span>Preferred Walking Days:</span><br><br>
+        <input type="checkbox" name="day" value="Sunday"><label>Sunday</label>
+        <input type="checkbox" name="day" value="Monday"><label>Monday</label>
+        <input type="checkbox" name="day" value="Tuesday"><label>Tuesday</label>
+        <input type="checkbox" name="day" value="Wednesday"><label>Wednesday</label>
+        <input type="checkbox" name="day" value="Thursday"><label>Thursday</label>
+        <input type="checkbox" name="day" value="Friday"><label>Friday</label>
+        <input type="checkbox" name="day" value="Saturday"><label>Saturday</label>
+        <br><br><input required type="submit" value="Submit" class="submit">
+    </form>
+</div>
+</body>
+</html>

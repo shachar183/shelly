@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<link rel="stylesheet" type="text/css" href="stylesheets/project_style.css">
+<body>
+<table class="toolbar">
+    <td class="toolbar" id="user">
+        {{current_owner.owner_full_name}}
+        <a class="switch" href="/logout"> switch user</a>
+    </td>
+    <td class="toolbar"><a href="/dogwalker" class="toolbar">Dog Walkers</a></td>
+    <td class="toolbar"><a href="/account" class="toolbar">Account</a></td>
+</table>
+<div class="page">
+    <table align="center" class="info">
+        <tr>
+            <th><h1>Me</h1></th>
+            <th><h1>My Dog</h1></th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>Name: {{current_owner.owner_full_name}}</li>
+                    <li>Email: {{current_owner.owner_email}}</li>
+                    <li>Phone Number: {{current_owner.owner_phone}}</li>
+                    <li>City: {{current_owner.owner_city}}</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li>Name: {{current_owner.dog_name}}</li>
+                    <li>Breed: {{current_owner.dog_type}}</li>
+                    <li>Gender: {{current_owner.dog_gender}}</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <table align="center" class="info">
+        <tr>
+            <th>
+                <h1>General Dog Breed Info</h1>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <p>Average height: {{current_owner.dog_info['avg_height']}}<br>
+                    Average weight: {{current_owner.dog_info['avg_weight']}}<br>
+                </p>
+            </td>
+        </tr>
+    </table>
+    <table align="center" class="info" id="day">
+        <tr>
+            <th><h1>Sunday</h1></th>
+            <th><h1>Monday</h1></th>
+            <th><h1>Tuesday</h1></th>
+            <th><h1>Wednesday</h1></th>
+            <th><h1>Thursday</h1></th>
+            <th><h1>Friday</h1></th>
+            <th><h1>Saturday</h1></th>
+        </tr>
+        <tr>
+        {% for day in current_owner.schedule %}
+        {% if day == [] %}
+            <td>
+                <p><br></p>
+            </td>
+        {% endif %}
+        {% if day != [] %}
+            <td>
+                {% for walker in day %}
+                <p>
+                    walker
+                </p>
+                {% endfor %}
+            </td>
+        {% endif %}
+        {% endfor %}
+<!--        <td>-->
+<!--            <p>-->
+<!--                walker_1<br>-->
+<!--                walker_2<br>-->
+<!--            </p>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <p></p>-->
+<!--        </td>-->
+<!--        <td><p></p></td>-->
+<!--        <td><p></p></td>-->
+<!--        <td><p></p></td>-->
+        </tr>
+    </table>
+</div>
+</body>
+
+
+</html>
